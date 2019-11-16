@@ -28,13 +28,21 @@ function displayAnimalInfo() {
                 // Creating and storing a div tag
                 var animalDiv = $("<div>");
 
+                animalDiv.attr("class", "animalsdiv");
+
                 // Creating a paragraph tag with the result item's rating
                 var p = $("<p>").text("Rating: " + results[i].rating);
 
                 // Creating and storing an image tag
                 var animalImage = $("<img>");
+
                 // Setting the src attribute of the image to a property pulled off the result item
-                animalImage.attr("src", results[i].images.fixed_height.url);
+                animalImage.attr("src", results[i].images.fixed_height_still.url);
+                animalImage.attr("data-still", results[i].images.fixed_height_still.url);
+                animalImage.attr("data-animate", results[i].images.fixed_height.url);
+                animalImage.attr("data-state", "still");
+                animalImage.attr("class", "gif");
+
 
                 // Appending the paragraph and image tag to the animalDiv
                 animalDiv.append(p);
@@ -43,6 +51,21 @@ function displayAnimalInfo() {
                 // Prependng the animalDiv to the HTML page in the "#animals-view" div
                 $("#animals-view").prepend(animalDiv);
             }
+
+            $(".gif").on("click", function () {
+                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                var state = $(this).attr("data-state");
+                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                // Then, set the image's data-state to animate
+                // Else set src to the data-still value
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            });
         });
 
 }
@@ -74,15 +97,18 @@ function renderButtons() {
         // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
         var a = $("<button>");
         // Adding a class of animal-btn to our button
-        a.addClass("alert alert-info animal-btn");
+        a.addClass("alert btn-info animal-btn");
         // Adding a data-attribute
         a.attr("data-name", animals[i]);
         // Providing the initial button text
         a.text(animals[i]);
+        // Adding a format-attribute
+        a.attr("height", "50px");
         // Adding the button to the buttons-view div
         $("#buttons-view").append(a);
     }
 }
 
+renderButtons();
 // Adding a click event listener to all elements with a class of "animal-btn"
 $(document).on("click", ".alert", displayAnimalInfo);

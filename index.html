@@ -8,9 +8,9 @@
         div,
         form,
         input {
-          margin: 20px;
+            margin: 10px;
         }
-      </style>
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -21,24 +21,35 @@
 </head>
 
 <body>
+
     <div id="container">
-        <!-- Searched Buttons will get Dumped Here  -->
-        <div id="buttons-view"></div>
+        <div class="row">
+            <!-- Searched Buttons will get Dumped Here  -->
+            <div id="buttons-view"></div>
+        </div>
 
-        <form id="animal-form">
-            <label for="animal-input">Add an animal</label>
-            <input type="text" id="animal-input">
-            <br>
 
-            <!-- Button triggers new animal to be added -->
-            <input id="add-animal" type="submit" value="Submit">
-        </form>
+        <div class="row">
 
-        <!-- Animals will Get Dumped Here -->
-        <div id="animals-view"></div>
+            <div class="col-lg-9">
+                <!-- Animals will Get Dumped Here -->
+                <div id="animals-view"></div>
+            </div>
 
-        <script type="text/javascript" src="assets/javascript/api.js"></script>
+
+            <div class="col-lg-2">
+                <form id="animal-form">
+                    <label for="animal-input">Add an animal</label><br>
+                    <input type="text" id="animal-input">
+                    <br> <br>
+                    <!-- Button triggers new animal to be added -->
+                    <input class="btn btn-info" id="add-animal" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script type="text/javascript" src="assets/javascript/api.js"></script>
 </body>
 
 </html>
